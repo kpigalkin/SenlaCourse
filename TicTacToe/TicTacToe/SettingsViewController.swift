@@ -8,19 +8,18 @@ import UIKit
 
 
 
+
 class SettingsViewController: UIViewController {
     
     let items = ["RUSSIAN", "ENGLISH"]
     let drawModeStatus = ["OFF DRAWMODE", "ON DRAWMODE"]
-    
-    
+        
     private lazy var languageSC: UISegmentedControl = {
         let languageSC = UISegmentedControl(items: items)
-        languageSC.selectedSegmentIndex = languageSCStoreIndex
+        languageSC.selectedSegmentIndex = RockPaper.languageSCStoreIndex
         languageSC.selectedSegmentTintColor = .systemYellow
         languageSC.addAction(UIAction() { [self]_ in
-            print("languageSC.selectedSegmentIndex - \(languageSC.selectedSegmentIndex)")
-            languageSCStoreIndex = languageSC.selectedSegmentIndex
+            RockPaper.languageSCStoreIndex = languageSC.selectedSegmentIndex
             changeLanguage()
         }, for: .valueChanged)
         return languageSC
@@ -28,10 +27,10 @@ class SettingsViewController: UIViewController {
     
     private lazy var drawModeStatusSC: UISegmentedControl = {
         let drawModeStatusSC = UISegmentedControl(items: drawModeStatus)
-        drawModeStatusSC.selectedSegmentIndex = drawModeStatusSCStoreIndex
+        drawModeStatusSC.selectedSegmentIndex = RockPaper.drawModeStatusSCStoreIndex
         drawModeStatusSC.selectedSegmentTintColor = .systemYellow
         drawModeStatusSC.addAction(UIAction() { [self]_ in
-            drawModeStatusSCStoreIndex = drawModeStatusSC.selectedSegmentIndex
+            RockPaper.drawModeStatusSCStoreIndex = drawModeStatusSC.selectedSegmentIndex
             changeDrawMode()
         }, for: .valueChanged)
         return drawModeStatusSC
@@ -57,7 +56,19 @@ private extension SettingsViewController {
         view.addSubview(languageSC)
         view.addSubview(drawModeStatusSC)
     }
+    
+    func changeLanguage() {
+        switch RockPaper.languageStatus {
+        case .eng:
+            RockPaper.languageStatus = .rus
+        case .rus:
+            RockPaper.languageStatus = .eng
+        }
+    }
+    
+    func changeDrawMode() {
+        RockPaper.drawModeStatus = !RockPaper.drawModeStatus
+    }
 }
 
 
-/////////////...

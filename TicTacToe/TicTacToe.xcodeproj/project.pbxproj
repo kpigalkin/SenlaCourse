@@ -12,9 +12,8 @@
 		DB7BB9BB27F2397300129317 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB7BB9BA27F2397300129317 /* Assets.xcassets */; };
 		DB7BB9CC27F23C4600129317 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7BB9CB27F23C4600129317 /* TabBarController.swift */; };
 		DB7BB9D227F3469D00129317 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7BB9D127F3469D00129317 /* NavigationController.swift */; };
-		DBA409E827F61D5B00ECF636 /* CubeGameResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA409E727F61D5B00ECF636 /* CubeGameResultViewController.swift */; };
 		DBA409EA27F61D9200ECF636 /* CubeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA409E927F61D9200ECF636 /* CubeViewController.swift */; };
-		DBA409EC27F61DE700ECF636 /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA409EB27F61DE700ECF636 /* GameLogic.swift */; };
+		DBA409EC27F61DE700ECF636 /* RockPaperGameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA409EB27F61DE700ECF636 /* RockPaperGameLogic.swift */; };
 		DBA409EE27F61DF600ECF636 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA409ED27F61DF600ECF636 /* SettingsViewController.swift */; };
 		DBA409F027F61DFD00ECF636 /* GameResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA409EF27F61DFD00ECF636 /* GameResultViewController.swift */; };
 		DBA409F227F61E0B00ECF636 /* RockPaperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA409F127F61E0B00ECF636 /* RockPaperViewController.swift */; };
@@ -28,9 +27,8 @@
 		DB7BB9BF27F2397300129317 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB7BB9CB27F23C4600129317 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		DB7BB9D127F3469D00129317 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
-		DBA409E727F61D5B00ECF636 /* CubeGameResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CubeGameResultViewController.swift; sourceTree = "<group>"; };
 		DBA409E927F61D9200ECF636 /* CubeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CubeViewController.swift; sourceTree = "<group>"; };
-		DBA409EB27F61DE700ECF636 /* GameLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
+		DBA409EB27F61DE700ECF636 /* RockPaperGameLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RockPaperGameLogic.swift; sourceTree = "<group>"; };
 		DBA409ED27F61DF600ECF636 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		DBA409EF27F61DFD00ECF636 /* GameResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameResultViewController.swift; sourceTree = "<group>"; };
 		DBA409F127F61E0B00ECF636 /* RockPaperViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RockPaperViewController.swift; sourceTree = "<group>"; };
@@ -73,11 +71,10 @@
 				DB7BB9B327F2397200129317 /* SceneDelegate.swift */,
 				DB7BB9CB27F23C4600129317 /* TabBarController.swift */,
 				DBA409F127F61E0B00ECF636 /* RockPaperViewController.swift */,
-				DBA409EF27F61DFD00ECF636 /* GameResultViewController.swift */,
 				DBA409ED27F61DF600ECF636 /* SettingsViewController.swift */,
+				DBA409EF27F61DFD00ECF636 /* GameResultViewController.swift */,
 				DBA409E927F61D9200ECF636 /* CubeViewController.swift */,
-				DBA409EB27F61DE700ECF636 /* GameLogic.swift */,
-				DBA409E727F61D5B00ECF636 /* CubeGameResultViewController.swift */,
+				DBA409EB27F61DE700ECF636 /* RockPaperGameLogic.swift */,
 			);
 			path = TicTacToe;
 			sourceTree = "<group>";
@@ -155,12 +152,11 @@
 				DBA409F227F61E0B00ECF636 /* RockPaperViewController.swift in Sources */,
 				DB7BB9CC27F23C4600129317 /* TabBarController.swift in Sources */,
 				DBA409EA27F61D9200ECF636 /* CubeViewController.swift in Sources */,
-				DBA409EC27F61DE700ECF636 /* GameLogic.swift in Sources */,
+				DBA409EC27F61DE700ECF636 /* RockPaperGameLogic.swift in Sources */,
 				DB7BB9D227F3469D00129317 /* NavigationController.swift in Sources */,
 				DB7BB9B427F2397200129317 /* SceneDelegate.swift in Sources */,
 				DBA409EE27F61DF600ECF636 /* SettingsViewController.swift in Sources */,
 				DBA409F027F61DFD00ECF636 /* GameResultViewController.swift in Sources */,
-				DBA409E827F61D5B00ECF636 /* CubeGameResultViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

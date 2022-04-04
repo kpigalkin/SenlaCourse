@@ -19,7 +19,7 @@ class GameResultViewController: UIViewController {
     
     private lazy var computerButton: UIButton = {
         let button = UIButton()
-        button.setTitle(ItemsEnum.random(drawMode: RockPaper.drawModeStatus), for: .normal)
+        button.setTitle(RockPaper.ItemsEnum.random(drawMode: RockPaper.drawModeStatus), for: .normal)
         RockPaper.computerChose = button.titleLabel?.text ?? ""
         button.titleLabel?.font = .systemFont(ofSize: 65, weight: .medium)
         button.backgroundColor = .clear
@@ -32,11 +32,8 @@ class GameResultViewController: UIViewController {
         button.setTitle("Again", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 30, weight: .medium)
         button.addAction(UIAction() { [weak self] _ in
-            
             self?.routeToPlayAgain()
-            RockPaper.userChose = button.titleLabel!.text!
-            }, for: .touchUpInside)
-
+        }, for: .touchUpInside)
         button.backgroundColor = .brown
         button.layer.cornerRadius = 11
         return button
@@ -62,7 +59,7 @@ class GameResultViewController: UIViewController {
 private extension GameResultViewController {
     func setupView() {
         view.backgroundColor = .systemYellow
-        computerButton.titleLabel?.text = ItemsEnum.random(drawMode: RockPaper.drawModeStatus)
+        computerButton.titleLabel?.text = RockPaper.ItemsEnum.random(drawMode: RockPaper.drawModeStatus)
         title = printGameResultTitle(status: determinationWinner())
         view.addSubview(userButton)
         view.addSubview(computerButton)
@@ -70,6 +67,31 @@ private extension GameResultViewController {
     }
     func routeToPlayAgain() {
         navigationController?.popToRootViewController(animated: false)
+    }
+    func determinationWinner() -> RockPaper.GameResult {
+        let user = RockPaper.userChose
+        let computer = RockPaper.computerChose
+        
+        if computer == user {return .draw}
+        
+        if computer == "✂️" && user == "🗿" {return .win}
+        if computer == "✂️" && user == "🧻" {return .lose}
+
+        if computer == "🧻" && user == "✂️" {return .win}
+        if computer == "🧻" && user == "🗿" {return .lose}
+
+        if computer == "🗿" && user == "🧻" {return .win}
+        if computer == "🗿" && user == "✂️" {return .lose}
+        
+        return .defaultStatus
+    }
+    func printGameResultTitle(status: RockPaper.GameResult) -> String? {
+        switch RockPaper.languageStatus {
+        case .eng:
+            return RockPaper.englishLanguage[status]
+        case .rus:
+            return RockPaper.russianLanguage[status]
+        }
     }
 }
 

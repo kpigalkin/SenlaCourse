@@ -82,8 +82,7 @@ private extension RockPaperViewController {
         button.setImage(
         UIImage(
             systemName: "gearshape.fill",
-            withConfiguration: UIImage.SymbolConfiguration(pointSize: 32)
-            ),
+            withConfiguration: UIImage.SymbolConfiguration(pointSize: 32)),
             for: .normal)
         button.imageView?.tintColor = .black
         button.addAction(UIAction() {
@@ -108,7 +107,8 @@ private extension RockPaperViewController {
     
     func routeToSettings() {
         let vc = SettingsViewController()
-        present(vc, animated: true)
+        vc.view.backgroundColor = .systemGray6
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 
