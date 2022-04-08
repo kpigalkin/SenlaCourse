@@ -16,7 +16,6 @@
          button.titleLabel?.font = .systemFont(ofSize: 65, weight: .medium)
          button.addAction(UIAction() { [weak self] _ in
              self?.routeToGameResult(button: self!.button)
-             RockPaper.userChose = button.titleLabel!.text!
              }, for: .touchUpInside)
          button.backgroundColor = .clear
          button.layer.cornerRadius = 40
@@ -100,9 +99,10 @@
      }
 
      func routeToGameResult(button: UIButton) {
-         let vc = GameResultViewController()
          RockPaper.userChose = button.titleLabel!.text!
          RockPaper.computerChose = RockPaper.ItemsEnum.random(drawMode: RockPaper.drawModeStatus)
+         
+         let vc = GameResultViewController()
          navigationController?.pushViewController(vc, animated: false)
      }
 

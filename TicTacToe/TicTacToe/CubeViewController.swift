@@ -19,7 +19,6 @@ import UIKit
          button.setTitle(playingField[0], for: .normal)
          button.titleLabel?.font = .systemFont(ofSize: 100, weight: .medium)
          button.backgroundColor = .clear
-         button.tag = 1
          return button
      }()
      lazy var button2: UIButton = {
@@ -27,7 +26,6 @@ import UIKit
          button.setTitle(playingField[1], for: .normal)
          button.titleLabel?.font = .systemFont(ofSize: 100, weight: .medium)
          button.backgroundColor = .clear
-         button.tag = 2
          return button
      }()
      lazy var button3: UIButton = {
@@ -35,7 +33,6 @@ import UIKit
          button.setTitle(playingField[2], for: .normal)
          button.titleLabel?.font = .systemFont(ofSize: 100, weight: .medium)
          button.backgroundColor = .clear
-         button.tag = 3
          return button
      }()
      lazy var button4: UIButton = {
@@ -43,7 +40,6 @@ import UIKit
          button.setTitle(playingField[3], for: .normal)
          button.titleLabel?.font = .systemFont(ofSize: 100, weight: .medium)
          button.backgroundColor = .clear
-         button.tag = 4
          return button
      }()
      lazy var button5: UIButton = {
@@ -51,7 +47,6 @@ import UIKit
          button.setTitle(playingField[4], for: .normal)
          button.titleLabel?.font = .systemFont(ofSize: 100, weight: .medium)
          button.backgroundColor = .clear
-         button.tag = 5
          return button
      }()
      lazy var button6: UIButton = {
@@ -59,7 +54,6 @@ import UIKit
          button.setTitle(playingField[5], for: .normal)
          button.titleLabel?.font = .systemFont(ofSize: 100, weight: .medium)
          button.backgroundColor = .clear
-         button.tag = 6
          return button
      }()
      lazy var throwButton: UIButton = {
@@ -67,13 +61,7 @@ import UIKit
          button.setTitle("Throw a dice", for: .normal)
          button.titleLabel?.font = .systemFont(ofSize: 30, weight: .medium)
          button.addAction(UIAction() { [weak self] _ in
-             if self!.buttonsAction {
-                 // default action: "play"
-                 self?.routeToDiceGameResult()
-             } else {
-                 // "play again"
-                 self?.initialSettings()
-             }
+             self?.buttonConditionOfAction()
          }, for: .touchUpInside)
          button.backgroundColor = .brown
          button.layer.cornerRadius = 11
@@ -125,12 +113,12 @@ import UIKit
 
      func diceRolling() {
          let buttons = [
-         button, button2, button3,
-         button4, button5, button6
+            button, button2, button3,
+            button4, button5, button6
          ]
-         let tag = Int.random(in: 1..<7)
-         for item in buttons {
-             if item.tag != tag {item.removeFromSuperview()}
+         let randomButton = buttons.randomElement() ?? button
+         buttons.forEach(){
+             if $0 != randomButton {$0.removeFromSuperview()}
          }
      }
 
@@ -145,5 +133,14 @@ import UIKit
          buttonsAction = !buttonsAction
          throwButton.setTitle("Throw a dice", for: .normal)
          viewDidLoad()
+     }
+     func buttonConditionOfAction() {
+         if buttonsAction {
+             // default action: "play"
+             routeToDiceGameResult()
+         } else {
+             // "play again"
+             initialSettings()
+         }
      }
  }
