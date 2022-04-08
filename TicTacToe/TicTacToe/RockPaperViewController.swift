@@ -8,7 +8,7 @@
 import UIKit
 
 
-class RockPaperViewController: UIViewController {
+final class RockPaperViewController: UIViewController {
     
     private lazy var button: UIButton = {
         let button = UIButton()
@@ -82,8 +82,7 @@ private extension RockPaperViewController {
         button.setImage(
         UIImage(
             systemName: "gearshape.fill",
-            withConfiguration: UIImage.SymbolConfiguration(pointSize: 32)
-            ),
+            withConfiguration: UIImage.SymbolConfiguration(pointSize: 32)),
             for: .normal)
         button.imageView?.tintColor = .black
         button.addAction(UIAction() {
@@ -103,12 +102,13 @@ private extension RockPaperViewController {
     func routeToGameResult(button: UIButton) {
         let vc = GameResultViewController()
         RockPaper.userChose = button.titleLabel!.text!
+        RockPaper.computerChose = RockPaper.ItemsEnum.random(drawMode: RockPaper.drawModeStatus)
         navigationController?.pushViewController(vc, animated: false)
     }
     
     func routeToSettings() {
         let vc = SettingsViewController()
-        present(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 

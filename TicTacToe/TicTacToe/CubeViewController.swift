@@ -7,8 +7,11 @@
 
 import UIKit
 
-class CubeViewController: UIViewController {
+
+final class CubeViewController: UIViewController {
     
+    var buttonsAction = true
+
     let playingField = [
     "\u{02680}",
     "\u{02681}",
@@ -66,23 +69,24 @@ class CubeViewController: UIViewController {
         button.tag = 6
         return button
     }()
-    
     lazy var throwButton: UIButton = {
         let button = UIButton()
         button.setTitle("Throw a dice", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 30, weight: .medium)
-
         button.addAction(UIAction() { [weak self] _ in
-            self?.routeToDiceGameResult()
-            RockPaper.userChose = button.titleLabel!.text!
-            }, for: .touchUpInside)
-
+            if self!.buttonsAction {
+                // default action: "play"
+                self?.routeToDiceGameResult()
+            } else {
+                // "play again"
+                self?.initialSettings()
+            }
+        }, for: .touchUpInside)
         button.backgroundColor = .brown
         button.layer.cornerRadius = 11
         return button
     }()
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -98,7 +102,6 @@ class CubeViewController: UIViewController {
         button6.frame = CGRect(origin: .zero, size: .init(width: 90, height: 90))
         throwButton.frame = CGRect(origin: .zero, size: .init(width: 180, height: 50))
 
-
         button.center = view.center
         button2.center = CGPoint(x: view.center.x - 90.0, y: view.center.y)
         button3.center = CGPoint(x: view.center.x + 90.0, y: view.center.y)
@@ -106,9 +109,10 @@ class CubeViewController: UIViewController {
         button5.center = CGPoint(x: view.center.x + 90.0, y: view.center.y - 90.0)
         button6.center = CGPoint(x: view.center.x, y: view.center.y - 90.0)
         throwButton.center = CGPoint(x: view.center.x, y: view.center.y + 105.0)
-
     }
 }
+
+// default setup
 private extension CubeViewController {
     func setupView() {
         view.backgroundColor = .systemYellow
@@ -120,10 +124,34 @@ private extension CubeViewController {
         view.addSubview(button6)
         view.addSubview(throwButton)
     }
+}
+
+
+// Throwing a dice
+private extension CubeViewController {
+    
+    func diceRolling() {
+        let buttons = [
+        button, button2, button3,
+        button4, button5, button6
+        ]
+        let tag = Int.random(in: 1..<7)
+        for item in buttons {
+            if item.tag != tag {item.removeFromSuperview()}
+        }
+    }
+    
     func routeToDiceGameResult() {
-        
-        let vc = CubeGameResultViewController()
-        navigationController?.pushViewController(vc, animated: false)
+        view.backgroundColor = .systemBlue
+        throwButton.setTitle("Play again", for: .normal)
+        buttonsAction = !buttonsAction
+        diceRolling()
+    }
+    
+    func initialSettings() {
+        buttonsAction = !buttonsAction
+        throwButton.setTitle("Throw a dice", for: .normal)
+        viewDidLoad()
     }
     
 }
