@@ -17,24 +17,21 @@ struct RockPaper {
         case win, lose, draw, defaultStatus
     }
 
-    enum ItemsEnum: String {
+    enum ItemsEnum: String, CaseIterable {
         case rock = "🗿"
         case paper = "🧻"
         case scissors = "✂️"
         
         static func random(drawMode: Bool) -> ItemsEnum.RawValue {
-            let all: [ItemsEnum] = [
-                .rock,
-                .paper,
-                .scissors,
-            ]
-            var randomIndex = Int(arc4random()) % all.count
-            // drawmode condition
-            while all[randomIndex].rawValue == RockPaper.userChose && drawMode == false
-                {
-                randomIndex = Int(arc4random()) % all.count
-                }
-            return all[randomIndex].rawValue
+            
+            var all = [String]()
+            allCases.forEach() {
+                all.append($0.rawValue)
+            }
+            if drawMode == false {
+                all = all.filter {$0 != userChose}
+            }
+            return all.randomElement()!
             }
     }
 

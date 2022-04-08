@@ -8,7 +8,7 @@
 import UIKit
 
 
-class RockPaperViewController: UIViewController {
+final class RockPaperViewController: UIViewController {
     
     private lazy var button: UIButton = {
         let button = UIButton()
@@ -102,12 +102,12 @@ private extension RockPaperViewController {
     func routeToGameResult(button: UIButton) {
         let vc = GameResultViewController()
         RockPaper.userChose = button.titleLabel!.text!
+        RockPaper.computerChose = RockPaper.ItemsEnum.random(drawMode: RockPaper.drawModeStatus)
         navigationController?.pushViewController(vc, animated: false)
     }
     
     func routeToSettings() {
         let vc = SettingsViewController()
-        vc.view.backgroundColor = .systemGray6
         navigationController?.pushViewController(vc, animated: true)
     }
     

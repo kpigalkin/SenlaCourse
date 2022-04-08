@@ -8,7 +8,7 @@
 import UIKit
 
 
-class CubeViewController: UIViewController {
+final class CubeViewController: UIViewController {
     
     var buttonsAction = true
 

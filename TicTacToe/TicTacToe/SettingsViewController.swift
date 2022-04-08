@@ -9,10 +9,10 @@ import UIKit
 
 
 
-class SettingsViewController: UIViewController {
+final class SettingsViewController: UIViewController {
     
-    let items = ["RUSSIAN", "ENGLISH"]
-    let drawModeStatus = ["OFF DRAWMODE", "ON DRAWMODE"]
+    private let items = ["RUSSIAN", "ENGLISH"]
+    private let drawModeStatus = ["OFF DRAWMODE", "ON DRAWMODE"]
         
     private lazy var languageSC: UISegmentedControl = {
         let languageSC = UISegmentedControl(items: items)
