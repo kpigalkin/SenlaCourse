@@ -7,7 +7,7 @@
  import UIKit
 
 final class GameResultViewController: UIViewController {
-
+    
     private var userLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -56,21 +56,50 @@ final class GameResultViewController: UIViewController {
 }
 
 private extension GameResultViewController {
+    
     func setupView() {
         view.backgroundColor = .systemYellow
-        userLabel.text = RockPaper.userChose
-        computerLabel.text = RockPaper.computerChose
+        userLabel.text = GameLogic.userChose
+        computerLabel.text = GameLogic.computerChose
         title = printGameResultTitle(status: determinationWinner())
+        winSetCounter(gameStatus: title!)
         view.addSubview(userLabel)
         view.addSubview(computerLabel)
         view.addSubview(againButton)
+        
+        sendingItemToCollection()
+    }
+    
+    // Appending elements in array named historyOfRockPaper.
+    func sendingItemToCollection() {
+        let newElement = HistoryOfRockPaper(
+            id: GameLogic.getRockPaperIndex,
+            gameStatus: title ?? "",
+            computerChose: computerLabel.text ?? "",
+            userChose: userLabel.text ?? "")
+        
+            GameLogic.historyOfRockPaper.append(newElement)
+    }
+    func winSetCounter(gameStatus: String) {
+        if (gameStatus == "Вы выиграли!" || gameStatus == "You win!")  {
+            GameLogic.currentWinSet += 1
+        } else { GameLogic.currentWinSet = 0 }
+        
+        print("GameLogic.currentWinSet - \(GameLogic.currentWinSet)")
+        
+        if GameLogic.currentWinSet > GameLogic.bestSet.bestSet {
+            GameLogic.bestSet.bestSet = GameLogic.currentWinSet
+        }
+        
+        print("GameLogic.bestSet.bestSet - \(GameLogic.bestSet.bestSet)")
+
     }
     func routeToPlayAgain() {
         navigationController?.popToRootViewController(animated: false)
     }
-    func determinationWinner() -> RockPaper.GameResult {
-        let user = RockPaper.userChose
-        let computer = RockPaper.computerChose
+    func determinationWinner() -> GameLogic.GameResult {
+        let user = GameLogic.userChose
+        let computer = GameLogic.computerChose
 
         if computer == user {return .draw}
 
@@ -85,12 +114,12 @@ private extension GameResultViewController {
         
         return .defaultStatus
     }
-    func printGameResultTitle(status: RockPaper.GameResult) -> String? {
-        switch RockPaper.languageStatus {
+    func printGameResultTitle(status: GameLogic.GameResult) -> String? {
+        switch GameLogic.languageStatus {
         case .eng:
-            return RockPaper.englishLanguage[status]
+            return GameLogic.englishLanguage[status]
         case .rus:
-            return RockPaper.russianLanguage[status]
+            return GameLogic.russianLanguage[status]
         }
     }
 }

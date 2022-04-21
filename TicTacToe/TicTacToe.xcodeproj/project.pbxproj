@@ -17,6 +17,15 @@
 		DBA409EE27F61DF600ECF636 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA409ED27F61DF600ECF636 /* SettingsViewController.swift */; };
 		DBA409F027F61DFD00ECF636 /* GameResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA409EF27F61DFD00ECF636 /* GameResultViewController.swift */; };
 		DBA409F227F61E0B00ECF636 /* RockPaperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA409F127F61E0B00ECF636 /* RockPaperViewController.swift */; };
+		DBAEA70F280761EB00A96795 /* DataStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAEA70E280761EB00A96795 /* DataStructures.swift */; };
+		DBAEA711280762D400A96795 /* HistoryCollectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAEA710280762D400A96795 /* HistoryCollectionItem.swift */; };
+		DBAEA7132807635100A96795 /* RockPaperConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAEA7122807635100A96795 /* RockPaperConfiguration.swift */; };
+		DBAEA71A280764A600A96795 /* CollectionViewLayoutFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAEA719280764A600A96795 /* CollectionViewLayoutFactory.swift */; };
+		DBAEA71C280A13A000A96795 /* BestSetConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAEA71B280A13A000A96795 /* BestSetConfiguration.swift */; };
+		DBAEA71E280EDCCA00A96795 /* ThrowInfoConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAEA71D280EDCCA00A96795 /* ThrowInfoConfiguration.swift */; };
+		DBAEA7202811A79400A96795 /* CubeGameConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAEA71F2811A79400A96795 /* CubeGameConfiguration.swift */; };
+		DBCC32D52805E36D003047DB /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCC32D42805E36D003047DB /* HistoryViewController.swift */; };
+		DBCC32DA2805EE4A003047DB /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCC32D92805EE4A003047DB /* HistoryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +41,15 @@
 		DBA409ED27F61DF600ECF636 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		DBA409EF27F61DFD00ECF636 /* GameResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameResultViewController.swift; sourceTree = "<group>"; };
 		DBA409F127F61E0B00ECF636 /* RockPaperViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RockPaperViewController.swift; sourceTree = "<group>"; };
+		DBAEA70E280761EB00A96795 /* DataStructures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStructures.swift; sourceTree = "<group>"; };
+		DBAEA710280762D400A96795 /* HistoryCollectionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCollectionItem.swift; sourceTree = "<group>"; };
+		DBAEA7122807635100A96795 /* RockPaperConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RockPaperConfiguration.swift; sourceTree = "<group>"; };
+		DBAEA719280764A600A96795 /* CollectionViewLayoutFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewLayoutFactory.swift; sourceTree = "<group>"; };
+		DBAEA71B280A13A000A96795 /* BestSetConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSetConfiguration.swift; sourceTree = "<group>"; };
+		DBAEA71D280EDCCA00A96795 /* ThrowInfoConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ThrowInfoConfiguration.swift; path = TicTacToe/DataStore/ThrowInfoConfiguration.swift; sourceTree = SOURCE_ROOT; };
+		DBAEA71F2811A79400A96795 /* CubeGameConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeGameConfiguration.swift; sourceTree = "<group>"; };
+		DBCC32D42805E36D003047DB /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		DBCC32D92805EE4A003047DB /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,13 +88,62 @@
 				DB7BB9D127F3469D00129317 /* NavigationController.swift */,
 				DB7BB9B327F2397200129317 /* SceneDelegate.swift */,
 				DB7BB9CB27F23C4600129317 /* TabBarController.swift */,
-				DBA409F127F61E0B00ECF636 /* RockPaperViewController.swift */,
-				DBA409EF27F61DFD00ECF636 /* GameResultViewController.swift */,
 				DBA409ED27F61DF600ECF636 /* SettingsViewController.swift */,
-				DBA409E927F61D9200ECF636 /* CubeViewController.swift */,
 				DBA409EB27F61DE700ECF636 /* GameLogic.swift */,
+				DBAEA7182807647000A96795 /* UIKit */,
+				DBAEA70D280761BE00A96795 /* DataStore */,
+				DBCC32D62805E753003047DB /* Modules */,
 			);
 			path = TicTacToe;
+			sourceTree = "<group>";
+		};
+		DBAEA70D280761BE00A96795 /* DataStore */ = {
+			isa = PBXGroup;
+			children = (
+				DBAEA70E280761EB00A96795 /* DataStructures.swift */,
+				DBAEA710280762D400A96795 /* HistoryCollectionItem.swift */,
+				DBAEA7122807635100A96795 /* RockPaperConfiguration.swift */,
+				DBAEA71F2811A79400A96795 /* CubeGameConfiguration.swift */,
+				DBAEA71D280EDCCA00A96795 /* ThrowInfoConfiguration.swift */,
+				DBAEA71B280A13A000A96795 /* BestSetConfiguration.swift */,
+			);
+			path = DataStore;
+			sourceTree = "<group>";
+		};
+		DBAEA7182807647000A96795 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				DBAEA719280764A600A96795 /* CollectionViewLayoutFactory.swift */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		DBCC32D62805E753003047DB /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				DBCC32D82805E76E003047DB /* Controller */,
+				DBCC32D72805E764003047DB /* View */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		DBCC32D72805E764003047DB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DBCC32D92805EE4A003047DB /* HistoryView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DBCC32D82805E76E003047DB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DBA409F127F61E0B00ECF636 /* RockPaperViewController.swift */,
+				DBA409EF27F61DFD00ECF636 /* GameResultViewController.swift */,
+				DBA409E927F61D9200ECF636 /* CubeViewController.swift */,
+				DBCC32D42805E36D003047DB /* HistoryViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,14 +215,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBAEA7132807635100A96795 /* RockPaperConfiguration.swift in Sources */,
+				DBAEA7202811A79400A96795 /* CubeGameConfiguration.swift in Sources */,
 				DB7BB9B227F2397200129317 /* AppDelegate.swift in Sources */,
+				DBAEA70F280761EB00A96795 /* DataStructures.swift in Sources */,
+				DBAEA71E280EDCCA00A96795 /* ThrowInfoConfiguration.swift in Sources */,
+				DBCC32D52805E36D003047DB /* HistoryViewController.swift in Sources */,
 				DBA409F227F61E0B00ECF636 /* RockPaperViewController.swift in Sources */,
 				DB7BB9CC27F23C4600129317 /* TabBarController.swift in Sources */,
 				DBA409EA27F61D9200ECF636 /* CubeViewController.swift in Sources */,
+				DBCC32DA2805EE4A003047DB /* HistoryView.swift in Sources */,
 				DBA409EC27F61DE700ECF636 /* GameLogic.swift in Sources */,
+				DBAEA71C280A13A000A96795 /* BestSetConfiguration.swift in Sources */,
 				DB7BB9D227F3469D00129317 /* NavigationController.swift in Sources */,
 				DB7BB9B427F2397200129317 /* SceneDelegate.swift in Sources */,
 				DBA409EE27F61DF600ECF636 /* SettingsViewController.swift in Sources */,
+				DBAEA711280762D400A96795 /* HistoryCollectionItem.swift in Sources */,
+				DBAEA71A280764A600A96795 /* CollectionViewLayoutFactory.swift in Sources */,
 				DBA409F027F61DFD00ECF636 /* GameResultViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

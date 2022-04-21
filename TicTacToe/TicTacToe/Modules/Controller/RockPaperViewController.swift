@@ -9,6 +9,8 @@
 
 
  final class RockPaperViewController: UIViewController {
+     
+     private var historyVC = HistoryViewController()
 
      private lazy var button: UIButton = {
          let button = UIButton()
@@ -99,8 +101,8 @@
      }
 
      func routeToGameResult(button: UIButton) {
-         RockPaper.userChose = button.titleLabel!.text!
-         RockPaper.computerChose = RockPaper.ItemsEnum.random(drawMode: RockPaper.drawModeStatus)
+         GameLogic.userChose = button.titleLabel!.text!
+         GameLogic.computerChose = GameLogic.ItemsEnum.random(drawMode: GameLogic.drawModeStatus)
          
          let vc = GameResultViewController()
          navigationController?.pushViewController(vc, animated: false)

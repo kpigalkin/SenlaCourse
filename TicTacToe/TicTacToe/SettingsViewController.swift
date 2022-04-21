@@ -16,10 +16,10 @@
 
      private lazy var languageSC: UISegmentedControl = {
          let languageSC = UISegmentedControl(items: items)
-         languageSC.selectedSegmentIndex = RockPaper.languageSCStoreIndex
+         languageSC.selectedSegmentIndex = GameLogic.languageSCStoreIndex
          languageSC.selectedSegmentTintColor = .systemYellow
          languageSC.addAction(UIAction() { [self]_ in
-             RockPaper.languageSCStoreIndex = languageSC.selectedSegmentIndex
+             GameLogic.languageSCStoreIndex = languageSC.selectedSegmentIndex
              changeLanguage()
          }, for: .valueChanged)
          return languageSC
@@ -27,10 +27,10 @@
 
      private lazy var drawModeStatusSC: UISegmentedControl = {
          let drawModeStatusSC = UISegmentedControl(items: drawModeStatus)
-         drawModeStatusSC.selectedSegmentIndex = RockPaper.drawModeStatusSCStoreIndex
+         drawModeStatusSC.selectedSegmentIndex = GameLogic.drawModeStatusSCStoreIndex
          drawModeStatusSC.selectedSegmentTintColor = .systemYellow
          drawModeStatusSC.addAction(UIAction() { [self]_ in
-             RockPaper.drawModeStatusSCStoreIndex = drawModeStatusSC.selectedSegmentIndex
+             GameLogic.drawModeStatusSCStoreIndex = drawModeStatusSC.selectedSegmentIndex
              changeDrawMode()
          }, for: .valueChanged)
          return drawModeStatusSC
@@ -58,15 +58,15 @@
      }
 
      func changeLanguage() {
-         switch RockPaper.languageStatus {
+         switch GameLogic.languageStatus {
          case .eng:
-             RockPaper.languageStatus = .rus
+             GameLogic.languageStatus = .rus
          case .rus:
-             RockPaper.languageStatus = .eng
+             GameLogic.languageStatus = .eng
          }
      }
 
      func changeDrawMode() {
-         RockPaper.drawModeStatus = !RockPaper.drawModeStatus
+         GameLogic.drawModeStatus = !GameLogic.drawModeStatus
      }
  }

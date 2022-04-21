@@ -31,9 +31,13 @@ private extension TabBarController {
         let navCRockPaper = NavigationController(
             rootViewController: RockPaperViewController()
         )
+        let navCHistory = NavigationController(
+            rootViewController: HistoryViewController()
+        )
+
         
         let configuration = UIImage.SymbolConfiguration(
-            pointSize: 24, weight: .heavy
+            pointSize: 23, weight: .heavy
         )
         
         
@@ -56,9 +60,18 @@ private extension TabBarController {
         )
         navCRockPaper.tabBarItem.selectedImage = UIImage(systemName: "gamecontroller.fill", withConfiguration: configuration)
         
+        navCHistory.tabBarItem = UITabBarItem(
+            title: "History",
+            image: UIImage(
+            systemName: "clock"
+            ),
+            tag: 2
+        )
+        navCHistory.tabBarItem.selectedImage = UIImage(systemName: "clock.fill", withConfiguration: configuration)
+        
         
         setViewControllers(
-            [navCRockPaper, navCTicTac],
+            [navCRockPaper, navCTicTac, navCHistory],
             animated: false
         )
     }
