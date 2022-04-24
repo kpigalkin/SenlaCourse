@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB3848BB28141AE200A86E66 /* CleanPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3848B528141AE200A86E66 /* CleanPresenter.swift */; };
+		DB3848BC28141AE200A86E66 /* CleanWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3848B628141AE200A86E66 /* CleanWorker.swift */; };
+		DB3848BD28141AE200A86E66 /* CleanRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3848B728141AE200A86E66 /* CleanRouter.swift */; };
+		DB3848BE28141AE200A86E66 /* CleanModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3848B828141AE200A86E66 /* CleanModels.swift */; };
+		DB3848BF28141AE200A86E66 /* CleanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3848B928141AE200A86E66 /* CleanViewController.swift */; };
+		DB3848C028141AE200A86E66 /* CleanInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3848BA28141AE200A86E66 /* CleanInteractor.swift */; };
+		DB70AECC2812011100507B37 /* AnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB70AECB2812011100507B37 /* AnimationViewController.swift */; };
 		DB7BB9B227F2397200129317 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7BB9B127F2397200129317 /* AppDelegate.swift */; };
 		DB7BB9B427F2397200129317 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7BB9B327F2397200129317 /* SceneDelegate.swift */; };
 		DB7BB9BB27F2397300129317 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB7BB9BA27F2397300129317 /* Assets.xcassets */; };
@@ -29,6 +36,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DB3848B528141AE200A86E66 /* CleanPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanPresenter.swift; sourceTree = "<group>"; };
+		DB3848B628141AE200A86E66 /* CleanWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanWorker.swift; sourceTree = "<group>"; };
+		DB3848B728141AE200A86E66 /* CleanRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanRouter.swift; sourceTree = "<group>"; };
+		DB3848B828141AE200A86E66 /* CleanModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanModels.swift; sourceTree = "<group>"; };
+		DB3848B928141AE200A86E66 /* CleanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanViewController.swift; sourceTree = "<group>"; };
+		DB3848BA28141AE200A86E66 /* CleanInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanInteractor.swift; sourceTree = "<group>"; };
+		DB70AECB2812011100507B37 /* AnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationViewController.swift; sourceTree = "<group>"; };
 		DB7BB9AE27F2397200129317 /* TicTacToe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TicTacToe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB7BB9B127F2397200129317 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DB7BB9B327F2397200129317 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +77,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DB3848C128141AF000A86E66 /* Clean */ = {
+			isa = PBXGroup;
+			children = (
+				DB3848B528141AE200A86E66 /* CleanPresenter.swift */,
+				DB3848B628141AE200A86E66 /* CleanWorker.swift */,
+				DB3848B728141AE200A86E66 /* CleanRouter.swift */,
+				DB3848B828141AE200A86E66 /* CleanModels.swift */,
+				DB3848B928141AE200A86E66 /* CleanViewController.swift */,
+				DB3848BA28141AE200A86E66 /* CleanInteractor.swift */,
+			);
+			path = Clean;
+			sourceTree = "<group>";
+		};
 		DB7BB9A527F2397200129317 = {
 			isa = PBXGroup;
 			children = (
@@ -100,8 +127,8 @@
 		DBAEA70D280761BE00A96795 /* DataStore */ = {
 			isa = PBXGroup;
 			children = (
-				DBAEA70E280761EB00A96795 /* DataStructures.swift */,
 				DBAEA710280762D400A96795 /* HistoryCollectionItem.swift */,
+				DBAEA70E280761EB00A96795 /* DataStructures.swift */,
 				DBAEA7122807635100A96795 /* RockPaperConfiguration.swift */,
 				DBAEA71F2811A79400A96795 /* CubeGameConfiguration.swift */,
 				DBAEA71D280EDCCA00A96795 /* ThrowInfoConfiguration.swift */,
@@ -121,6 +148,7 @@
 		DBCC32D62805E753003047DB /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				DB3848C128141AF000A86E66 /* Clean */,
 				DBCC32D82805E76E003047DB /* Controller */,
 				DBCC32D72805E764003047DB /* View */,
 			);
@@ -142,6 +170,7 @@
 				DBA409EF27F61DFD00ECF636 /* GameResultViewController.swift */,
 				DBA409E927F61D9200ECF636 /* CubeViewController.swift */,
 				DBCC32D42805E36D003047DB /* HistoryViewController.swift */,
+				DB70AECB2812011100507B37 /* AnimationViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -215,24 +244,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB3848BD28141AE200A86E66 /* CleanRouter.swift in Sources */,
 				DBAEA7132807635100A96795 /* RockPaperConfiguration.swift in Sources */,
 				DBAEA7202811A79400A96795 /* CubeGameConfiguration.swift in Sources */,
+				DB3848BB28141AE200A86E66 /* CleanPresenter.swift in Sources */,
 				DB7BB9B227F2397200129317 /* AppDelegate.swift in Sources */,
 				DBAEA70F280761EB00A96795 /* DataStructures.swift in Sources */,
+				DB3848BE28141AE200A86E66 /* CleanModels.swift in Sources */,
 				DBAEA71E280EDCCA00A96795 /* ThrowInfoConfiguration.swift in Sources */,
 				DBCC32D52805E36D003047DB /* HistoryViewController.swift in Sources */,
 				DBA409F227F61E0B00ECF636 /* RockPaperViewController.swift in Sources */,
 				DB7BB9CC27F23C4600129317 /* TabBarController.swift in Sources */,
 				DBA409EA27F61D9200ECF636 /* CubeViewController.swift in Sources */,
 				DBCC32DA2805EE4A003047DB /* HistoryView.swift in Sources */,
+				DB3848BC28141AE200A86E66 /* CleanWorker.swift in Sources */,
+				DB3848BF28141AE200A86E66 /* CleanViewController.swift in Sources */,
 				DBA409EC27F61DE700ECF636 /* GameLogic.swift in Sources */,
 				DBAEA71C280A13A000A96795 /* BestSetConfiguration.swift in Sources */,
+				DB70AECC2812011100507B37 /* AnimationViewController.swift in Sources */,
 				DB7BB9D227F3469D00129317 /* NavigationController.swift in Sources */,
 				DB7BB9B427F2397200129317 /* SceneDelegate.swift in Sources */,
 				DBA409EE27F61DF600ECF636 /* SettingsViewController.swift in Sources */,
 				DBAEA711280762D400A96795 /* HistoryCollectionItem.swift in Sources */,
 				DBAEA71A280764A600A96795 /* CollectionViewLayoutFactory.swift in Sources */,
 				DBA409F027F61DFD00ECF636 /* GameResultViewController.swift in Sources */,
+				DB3848C028141AE200A86E66 /* CleanInteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

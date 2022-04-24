@@ -22,6 +22,7 @@ final class HistoryView: UIView {
         cell.contentConfiguration = itemIdentifier
     }
     private let cubeRegistration = UICollectionView.CellRegistration<UICollectionViewCell, CubeGameConfiguration> { cell, indexPath, itemIdentifier in
+        cell.contentConfiguration = nil
         cell.contentConfiguration = itemIdentifier
     }
     private let throwInfoRegistration = UICollectionView.CellRegistration<UICollectionViewCell, ThrowInfoConfiguration> { cell, indexPath, itemIdentifier in
@@ -73,33 +74,33 @@ private extension HistoryView {
         var snapshot = NSDiffableDataSourceSnapshot<Section, HistoryCollectionItem>()
         
         snapshot.appendSections([.generalInfo, .rockPaper, .cubeGame])
-        snapshot.appendItems([GameLogic.throwInfo].map({ feed in
-                .init(content: .throwInfo(configuration: .init(
-                    id: feed.id,
-                    data: feed.data
-                )))
-        }), toSection: .generalInfo)
-        snapshot.appendItems(GameLogic.historyOfRockPaper.map { feed in
-            .init(content: .rockPaper(
-                configuration: .init(
-                    id: feed.id,
-                    gameStatus: feed.gameStatus,
-                    computerChose: feed.computerChose,
-                    userChose: feed.userChose
-                    )))
-        }, toSection: .rockPaper)
-        snapshot.appendItems(GameLogic.historyOfCubeGame.map { feed in
-            .init(content: .cubeGame(
-                configuration: .init(
-                    id: feed.id,
-                    randomCube: feed.randomCube
-                    )))
-            }, toSection: .cubeGame)
-        snapshot.appendItems([GameLogic.bestSet].map({ feed in
-                .init(content: .bestSet(configuration: .init(
-                    id: feed.id,
-                    bestSet: feed.bestSet)))
-        }), toSection: .generalInfo)
+//        snapshot.appendItems([GameLogic.throwInfo].map({ feed in
+//                .init(content: .throwInfo(configuration: .init(
+//                    id: feed.id,
+//                    data: feed.data
+//                )))
+//        }), toSection: .generalInfo)
+//        snapshot.appendItems(GameLogic.historyOfRockPaper.map { feed in
+//            .init(content: .rockPaper(
+//                configuration: .init(
+//                    id: feed.id,
+//                    gameStatus: feed.gameStatus,
+//                    computerChose: feed.computerChose,
+//                    userChose: feed.userChose
+//                    )))
+//        }, toSection: .rockPaper)
+//        snapshot.appendItems(GameLogic.historyOfCubeGame.map { feed in
+//            .init(content: .cubeGame(
+//                configuration: .init(
+//                    id: feed.id,
+//                    randomCube: feed.randomCube
+//                    )))
+//            }, toSection: .cubeGame)
+//        snapshot.appendItems([GameLogic.bestSet].map({ feed in
+//                .init(content: .bestSet(configuration: .init(
+//                    id: feed.id,
+//                    bestSet: feed.bestSet)))
+//        }), toSection: .generalInfo)
         dataSource.apply(snapshot)
     }
     func makeDataSource() -> UICollectionViewDiffableDataSource<Section, HistoryCollectionItem> {
@@ -126,41 +127,32 @@ private extension HistoryView {
 
 extension HistoryView: HistoryViewDelegate {
     
-    func updateCollection() {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, HistoryCollectionItem>()
-
-        let newRockPaperItems = GameLogic.historyOfRockPaper.map { feed in
-            HistoryCollectionItem(content: .rockPaper(configuration: .init(
-                id: feed.id,
-                gameStatus: feed.gameStatus,
-                computerChose: feed.computerChose,
-                userChose: feed.userChose)))
-        }
-        let newCubeGameItems = GameLogic.historyOfCubeGame.map { feed in
-            HistoryCollectionItem(content: .cubeGame(configuration: .init(
-                id: feed.id,
-                randomCube: feed.randomCube)))
-        }
-        let throwInfoItems = [GameLogic.throwInfo].map { feed in
-            HistoryCollectionItem.init(content: .throwInfo(configuration: .init(
-                id: feed.id,
-                data: feed.data)))
-        }
-        let bestSetItem = [GameLogic.bestSet].map { feed in
-            HistoryCollectionItem.init(content: .bestSet(configuration: .init(
-                id: feed.id,
-                bestSet: feed.bestSet)))
-        }
-            
-        snapshot.appendSections([.generalInfo, .rockPaper, .cubeGame])
-        snapshot.appendItems(newRockPaperItems, toSection: .rockPaper)
-        snapshot.appendItems(newCubeGameItems, toSection: .cubeGame)
-        snapshot.appendItems(bestSetItem, toSection: .generalInfo)
-        snapshot.appendItems(throwInfoItems, toSection: .generalInfo)
-
-        dataSource.applySnapshotUsingReloadData(snapshot, completion: nil)
+    func appendRockPaperItem(_ item: HistoryOfRockPaper) {
+        var snapshot = dataSource.snapshot()
+        let newItem = HistoryCollectionItem(content: .rockPaper(configuration: .init(
+            id: item.id,
+            gameStatus: item.gameStatus,
+            computerChose: item.computerChose,
+            userChose: item.userChose)))
+        snapshot.appendItems([newItem], toSection: .rockPaper)
+        dataSource.apply(snapshot)
+        
+        print("appendRockPaperItem")
+    }
+    
+    func appendCubeGameItem(_ item: HistoryOfCubeGame) {
+        var snapshot = dataSource.snapshot()
+        let newItem = HistoryCollectionItem(content: .cubeGame(configuration: .init(
+            id: item.id,
+            randomCube: item.randomCube)))
+        snapshot.appendItems([newItem], toSection: .cubeGame)
+        dataSource.apply(snapshot)
+        
+        print("appendCubeGameItem")
     }
 }
+    
 protocol HistoryViewDelegate: AnyObject {
-    func updateCollection()
+    func appendRockPaperItem(_ item: HistoryOfRockPaper)
+    func appendCubeGameItem(_ item: HistoryOfCubeGame)
 }

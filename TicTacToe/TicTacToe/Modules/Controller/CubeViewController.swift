@@ -2,6 +2,8 @@ import UIKit
 
 
  final class CubeViewController: UIViewController {
+     
+     private weak var dataDelegate: CubeGameDelegate?
 
      private var buttonsAction = true
 
@@ -154,8 +156,16 @@ import UIKit
              if $0 != randomButton {$0.removeFromSuperview()}
          }
          
-         // statistics for HistoryView
-         fillingStatistics(text: (randomButton.text)!)
+         // history of CubeGame (3rd section)
+         let cubeSide = HistoryOfCubeGame(
+            id: GameLogic.getCubeGameIndex,
+            randomCube: randomButton.text ?? "unknowed")
+         let hVC = HistoryViewController()
+         dataDelegate = hVC
+         dataDelegate?.sendCubeGameItem(cubeSide)
+         
+         // statistics for HistoryView (1st section)
+         fillingStatistics(sideOfCube: (randomButton.text)!)
      }
 
      func routeToDiceGameResult() {
@@ -179,26 +189,26 @@ import UIKit
              initialSettings()
          }
      }
-     func fillingStatistics(text: String) {
+     func fillingStatistics(sideOfCube: String) {
          
          // First section - persentage of throwing.
          numberOfThrowing += 1
-         throwStatistics[text]! += 1
+         throwStatistics[sideOfCube]! += 1
          
          Array(throwPercentage.keys).forEach { key in
              throwPercentage[key]! = (throwStatistics[key]! / numberOfThrowing * 100).rounded()
          }
          
          var newData = [String]()
-         throwPercentage.forEach { item in
-             let string = item.key + String(item.value)
-             newData.append(string)
+         throwPercentage.forEach { statistic in
+             let stringInCollection = statistic.key + String(statistic.value)
+             newData.append(stringInCollection)
          }
          GameLogic.throwInfo.data = newData
          
          // Third section - history of "Cube Game"
-         let newItem = HistoryOfCubeGame(id: GameLogic.getCubeGameIndex, randomCube: text)
-         GameLogic.historyOfCubeGame.append(newItem)
+//         let newItem = HistoryOfCubeGame(id: GameLogic.getCubeGameIndex, randomCube: sideOfCube)
+//         GameLogic.historyOfCubeGame.append(newItem)
          
      }
  }

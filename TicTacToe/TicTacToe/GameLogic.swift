@@ -10,13 +10,15 @@ import UIKit
 struct GameLogic {
     
     // Store data for HistoryView.
-    static var historyOfRockPaper = [HistoryOfRockPaper]()
+    static var historyOfRockPaper = 0
     static var getRockPaperIndex: Int {
-        historyOfRockPaper.count
+        historyOfRockPaper += 1
+        return historyOfRockPaper - 1
     }
-    static var historyOfCubeGame = [HistoryOfCubeGame]()
+    static var historyOfCubeGame = 0
     static var getCubeGameIndex: Int {
-        historyOfCubeGame.count
+        historyOfCubeGame += 1
+        return historyOfCubeGame - 1
     }
     static var throwInfo = ThrowInfo(id: 0, data: [])
     static var bestSet = BestRockPaperSet(id: 0, bestSet: 0)

@@ -29,7 +29,7 @@ struct HistoryCollectionItem: Hashable {
     }
     
     func hash(into hasher: inout Hasher) {
-//        hasher.combine(uuid)
+        hasher.combine(uuid)
     }
 }
 

@@ -8,6 +8,9 @@
 
 final class GameResultViewController: UIViewController {
     
+    private weak var dataDelegate: RockPaperDelegate?
+    private var historyVC = HistoryViewController()
+    
     private var userLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -62,41 +65,44 @@ private extension GameResultViewController {
         userLabel.text = GameLogic.userChose
         computerLabel.text = GameLogic.computerChose
         title = printGameResultTitle(status: determinationWinner())
-        winSetCounter(gameStatus: title!)
         view.addSubview(userLabel)
         view.addSubview(computerLabel)
         view.addSubview(againButton)
         
+        winSetCounter(gameStatus: title!)
         sendingItemToCollection()
     }
     
     // Appending elements in array named historyOfRockPaper.
     func sendingItemToCollection() {
-        let newElement = HistoryOfRockPaper(
+        let item = HistoryOfRockPaper(
             id: GameLogic.getRockPaperIndex,
-            gameStatus: title ?? "",
-            computerChose: computerLabel.text ?? "",
-            userChose: userLabel.text ?? "")
+            gameStatus: title ?? "title",
+            computerChose: GameLogic.computerChose,
+            userChose: GameLogic.userChose)
         
-            GameLogic.historyOfRockPaper.append(newElement)
+        dataDelegate = historyVC
+        dataDelegate?.sendRockPaperItem(item)
+        print("sendingItemToCollection")
     }
+            
     func winSetCounter(gameStatus: String) {
-        if (gameStatus == "Вы выиграли!" || gameStatus == "You win!")  {
+        if (gameStatus == GameLogic.russianLanguage[.win] ||
+            gameStatus == GameLogic.englishLanguage[.win]) {
             GameLogic.currentWinSet += 1
-        } else { GameLogic.currentWinSet = 0 }
-        
-        print("GameLogic.currentWinSet - \(GameLogic.currentWinSet)")
-        
+            } else {
+                GameLogic.currentWinSet = 0
+            }
+            
         if GameLogic.currentWinSet > GameLogic.bestSet.bestSet {
             GameLogic.bestSet.bestSet = GameLogic.currentWinSet
         }
-        
-        print("GameLogic.bestSet.bestSet - \(GameLogic.bestSet.bestSet)")
-
     }
+    
     func routeToPlayAgain() {
         navigationController?.popToRootViewController(animated: false)
     }
+    
     func determinationWinner() -> GameLogic.GameResult {
         let user = GameLogic.userChose
         let computer = GameLogic.computerChose

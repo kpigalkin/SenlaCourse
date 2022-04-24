@@ -125,7 +125,7 @@ final class ThrowInfoContentView: UIView, UIContentView {
     
     
 }
-extension ThrowInfoContentView: ThrowInfoContentViewDelegate {
+extension ThrowInfoContentView {
     internal func setupLabels() {
         if !GameLogic.throwInfo.data.isEmpty {
             let array = [

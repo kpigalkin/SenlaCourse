@@ -34,6 +34,9 @@ private extension TabBarController {
         let navCHistory = NavigationController(
             rootViewController: HistoryViewController()
         )
+        let navCAnimation = NavigationController(
+            rootViewController: AnimationViewController()
+        )
 
         
         let configuration = UIImage.SymbolConfiguration(
@@ -69,9 +72,18 @@ private extension TabBarController {
         )
         navCHistory.tabBarItem.selectedImage = UIImage(systemName: "clock.fill", withConfiguration: configuration)
         
+        navCAnimation.tabBarItem = UITabBarItem(
+            title: "Animation",
+            image: UIImage(
+            systemName: "bolt.horizontal.circle"
+            ),
+            tag: 3
+        )
+        navCAnimation.tabBarItem.selectedImage = UIImage(systemName: "bolt.horizontal.circle.fill", withConfiguration: configuration)
+        
         
         setViewControllers(
-            [navCRockPaper, navCTicTac, navCHistory],
+            [navCRockPaper, navCTicTac, navCHistory, navCAnimation],
             animated: false
         )
     }
