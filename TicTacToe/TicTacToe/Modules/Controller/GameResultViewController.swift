@@ -8,7 +8,7 @@
 
 final class GameResultViewController: UIViewController {
     
-    private weak var dataDelegate: RockPaperDelegate?
+    weak var dataDelegate: RockPaperDelegate?
     private var historyVC = HistoryViewController()
     
     private var userLabel: UILabel = {
@@ -75,15 +75,17 @@ private extension GameResultViewController {
     
     // Appending elements in array named historyOfRockPaper.
     func sendingItemToCollection() {
+        print("sendingItemToCollection")
+
         let item = HistoryOfRockPaper(
             id: GameLogic.getRockPaperIndex,
             gameStatus: title ?? "title",
             computerChose: GameLogic.computerChose,
             userChose: GameLogic.userChose)
         
-        dataDelegate = historyVC
-        dataDelegate?.sendRockPaperItem(item)
-        print("sendingItemToCollection")
+        let hVC = HistoryViewController()
+        self.dataDelegate = hVC
+        self.dataDelegate?.sendRockPaperItem(item)
     }
             
     func winSetCounter(gameStatus: String) {

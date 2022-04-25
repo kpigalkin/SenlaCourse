@@ -14,30 +14,34 @@ enum Section: Int {
     case cubeGame
 }
 
-final class HistoryView: UIView {
+final class HistoryView: UIView, UICollectionViewDelegate {
     
     private lazy var dataSource = makeDataSource()
 
     private let rockPaperRegistration = UICollectionView.CellRegistration<UICollectionViewCell, RockPaperContentConfiguration> { cell, indexPath, itemIdentifier in
         cell.contentConfiguration = itemIdentifier
     }
+    
     private let cubeRegistration = UICollectionView.CellRegistration<UICollectionViewCell, CubeGameConfiguration> { cell, indexPath, itemIdentifier in
         cell.contentConfiguration = nil
         cell.contentConfiguration = itemIdentifier
     }
+    
     private let throwInfoRegistration = UICollectionView.CellRegistration<UICollectionViewCell, ThrowInfoConfiguration> { cell, indexPath, itemIdentifier in
         cell.contentConfiguration = itemIdentifier
     }
+    
     private let bestSetRegistration = UICollectionView.CellRegistration<UICollectionViewCell, BestSetConfiguration> { cell, indexPath, itemIdentifier in
         cell.contentConfiguration = itemIdentifier
     }
+    
     private lazy var collectionView: UICollectionView = {
         let view = UICollectionView(
             frame: .zero,
             collectionViewLayout: CollectionViewLayoutFactory.historyFeedLayout())
         view.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         view.backgroundColor = .systemYellow
-        
+        view.delegate = self
         return view
     }()
     
@@ -47,8 +51,9 @@ final class HistoryView: UIView {
         backgroundColor = .secondarySystemBackground
         addSubviews()
         makeConstraints()
-        createSnapshot()
-        }
+        createSnapshotSections()
+        self.collectionView.delegate = self
+    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -70,7 +75,7 @@ private extension HistoryView {
         ])
     }
     
-    func createSnapshot() {
+    func createSnapshotSections() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, HistoryCollectionItem>()
         
         snapshot.appendSections([.generalInfo, .rockPaper, .cubeGame])
@@ -103,6 +108,7 @@ private extension HistoryView {
 //        }), toSection: .generalInfo)
         dataSource.apply(snapshot)
     }
+    
     func makeDataSource() -> UICollectionViewDiffableDataSource<Section, HistoryCollectionItem> {
         let dataSource = UICollectionViewDiffableDataSource<Section, HistoryCollectionItem>(collectionView: collectionView) { [weak self] collectionView,
             indexPath, item in
@@ -128,19 +134,21 @@ private extension HistoryView {
 extension HistoryView: HistoryViewDelegate {
     
     func appendRockPaperItem(_ item: HistoryOfRockPaper) {
+        print("appendRockPaperItem")
         var snapshot = dataSource.snapshot()
         let newItem = HistoryCollectionItem(content: .rockPaper(configuration: .init(
             id: item.id,
             gameStatus: item.gameStatus,
             computerChose: item.computerChose,
             userChose: item.userChose)))
+        
         snapshot.appendItems([newItem], toSection: .rockPaper)
         dataSource.apply(snapshot)
-        
-        print("appendRockPaperItem")
+        print(item)
     }
     
     func appendCubeGameItem(_ item: HistoryOfCubeGame) {
+        print("appendCubeGameItem")
         var snapshot = dataSource.snapshot()
         let newItem = HistoryCollectionItem(content: .cubeGame(configuration: .init(
             id: item.id,
@@ -148,7 +156,7 @@ extension HistoryView: HistoryViewDelegate {
         snapshot.appendItems([newItem], toSection: .cubeGame)
         dataSource.apply(snapshot)
         
-        print("appendCubeGameItem")
+        print(item)
     }
 }
     

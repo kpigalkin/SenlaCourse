@@ -52,49 +52,53 @@ final class AnimationViewController: UIViewController {
 
 private extension AnimationViewController {
     
-    func movingAnimationToRocket(to layer: CAShapeLayer) {
+    func movingAnimationToRocket() {
         let animation = CABasicAnimation(keyPath: "position.y")
         animation.fromValue = CGPoint.zero
         animation.toValue = -1000
         animation.duration = 3.0
         animation.beginTime = CACurrentMediaTime() + 0.9
-        layer.add(animation, forKey: nil)
+        rocketLayer.add(animation, forKey: nil)
     }
     
-    func movingAnimationToPlanet(to layer: CAShapeLayer) {
+    func movingAnimationToPlanet() {
         let animation = CABasicAnimation(keyPath: "position.y")
         animation.fromValue = CGPoint.zero
         animation.toValue = view.frame.maxY
         animation.duration = 3.0
         animation.beginTime = CACurrentMediaTime() + 0.9
-        layer.add(animation, forKey: nil)
+        planetLayer.add(animation, forKey: nil)
     }
     
-    func animationOfShakingToRocket(to layer: CAShapeLayer) {
+    func animationOfShakingToRocket() {
         let animation = CASpringAnimation(keyPath: "position")
-        let fromValue = NSValue(cgPoint: CGPoint(x: layer.frame.midX - 5, y: layer.frame.midY))
-        let toValue = NSValue(cgPoint: CGPoint(x: layer.frame.midX + 5, y: layer.frame.midY))
+        let fromValue = NSValue(cgPoint: CGPoint(
+            x: rocketLayer.frame.midX - 5,
+            y: rocketLayer.frame.midY))
+        let toValue = NSValue(cgPoint: CGPoint(
+            x: rocketLayer.frame.midX + 5,
+            y: rocketLayer.frame.midY))
         animation.duration = 0.1
         animation.repeatCount = 5
         animation.autoreverses = true
         animation.fromValue = fromValue
         animation.toValue = toValue
-        layer.add(animation, forKey: nil)
+        rocketLayer.add(animation, forKey: nil)
     }
-    func shrinkAnimationToRocket(to layer: CAShapeLayer) {
+    func shrinkAnimationToRocket() {
         let animation = CABasicAnimation(keyPath: "transform.scale")
         animation.toValue = 0
         animation.autoreverses = true
         animation.duration = 2.0
         animation.beginTime = CACurrentMediaTime() + 0.9
-        layer.add(animation, forKey: nil)
+        rocketLayer.add(animation, forKey: nil)
     }
     
     func animateView() {
-        shrinkAnimationToRocket(to: rocketLayer)
-        animationOfShakingToRocket(to: rocketLayer)
-        movingAnimationToRocket(to: rocketLayer)
-        movingAnimationToPlanet(to: planetLayer)
+        shrinkAnimationToRocket()
+        animationOfShakingToRocket()
+        movingAnimationToRocket()
+        movingAnimationToPlanet()
     }
     
     func createPath() {
