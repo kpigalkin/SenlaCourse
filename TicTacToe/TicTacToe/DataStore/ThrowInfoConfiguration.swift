@@ -126,7 +126,7 @@ final class ThrowInfoContentView: UIView, UIContentView {
     
 }
 extension ThrowInfoContentView {
-    internal func setupLabels() {
+     func setupLabels() {
         if !GameLogic.throwInfo.data.isEmpty {
             let array = [
             sideOfCube, sideOfCube2, sideOfCube3,
@@ -136,8 +136,6 @@ extension ThrowInfoContentView {
                 let index = array.firstIndex(of: label)
                 label.text = GameLogic.throwInfo.data[index!] + "%"
             }
-            print("setupLabels")
-            
         }
     }
 }

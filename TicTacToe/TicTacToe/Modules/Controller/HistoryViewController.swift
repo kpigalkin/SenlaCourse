@@ -10,14 +10,6 @@ import UIKit
 class HistoryViewController: UIViewController {
     
     weak var historyViewDelegate: HistoryViewDelegate?
-    private let historyView = HistoryView()
-    
-    override func loadView() {
-        view = historyView
-        
-        historyViewDelegate = historyView
-        
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +23,6 @@ class HistoryViewController: UIViewController {
 extension HistoryViewController: RockPaperDelegate {
     
     func sendRockPaperItem(_ item: HistoryOfRockPaper) {
-        historyViewDelegate = historyView
         historyViewDelegate?.appendRockPaperItem(item)
     }
 }
@@ -39,7 +30,6 @@ extension HistoryViewController: RockPaperDelegate {
 extension HistoryViewController: CubeGameDelegate {
     
     func sendCubeGameItem(_ item: HistoryOfCubeGame) {
-        historyViewDelegate = historyView
         historyViewDelegate?.appendCubeGameItem(item)
     }
 }

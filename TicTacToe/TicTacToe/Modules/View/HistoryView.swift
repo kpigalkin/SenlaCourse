@@ -8,7 +8,6 @@ import UIKit
 
 
 enum Section: Int {
-
     case generalInfo
     case rockPaper
     case cubeGame
@@ -19,6 +18,7 @@ final class HistoryView: UIView, UICollectionViewDelegate {
     private lazy var dataSource = makeDataSource()
 
     private let rockPaperRegistration = UICollectionView.CellRegistration<UICollectionViewCell, RockPaperContentConfiguration> { cell, indexPath, itemIdentifier in
+        cell.contentConfiguration = nil
         cell.contentConfiguration = itemIdentifier
     }
     
@@ -28,10 +28,12 @@ final class HistoryView: UIView, UICollectionViewDelegate {
     }
     
     private let throwInfoRegistration = UICollectionView.CellRegistration<UICollectionViewCell, ThrowInfoConfiguration> { cell, indexPath, itemIdentifier in
+        cell.contentConfiguration = nil
         cell.contentConfiguration = itemIdentifier
     }
     
     private let bestSetRegistration = UICollectionView.CellRegistration<UICollectionViewCell, BestSetConfiguration> { cell, indexPath, itemIdentifier in
+        cell.contentConfiguration = nil
         cell.contentConfiguration = itemIdentifier
     }
     
@@ -51,7 +53,7 @@ final class HistoryView: UIView, UICollectionViewDelegate {
         backgroundColor = .secondarySystemBackground
         addSubviews()
         makeConstraints()
-        createSnapshotSections()
+        createSections()
         self.collectionView.delegate = self
     }
     
@@ -75,37 +77,10 @@ private extension HistoryView {
         ])
     }
     
-    func createSnapshotSections() {
+    func createSections() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, HistoryCollectionItem>()
-        
         snapshot.appendSections([.generalInfo, .rockPaper, .cubeGame])
-//        snapshot.appendItems([GameLogic.throwInfo].map({ feed in
-//                .init(content: .throwInfo(configuration: .init(
-//                    id: feed.id,
-//                    data: feed.data
-//                )))
-//        }), toSection: .generalInfo)
-//        snapshot.appendItems(GameLogic.historyOfRockPaper.map { feed in
-//            .init(content: .rockPaper(
-//                configuration: .init(
-//                    id: feed.id,
-//                    gameStatus: feed.gameStatus,
-//                    computerChose: feed.computerChose,
-//                    userChose: feed.userChose
-//                    )))
-//        }, toSection: .rockPaper)
-//        snapshot.appendItems(GameLogic.historyOfCubeGame.map { feed in
-//            .init(content: .cubeGame(
-//                configuration: .init(
-//                    id: feed.id,
-//                    randomCube: feed.randomCube
-//                    )))
-//            }, toSection: .cubeGame)
-//        snapshot.appendItems([GameLogic.bestSet].map({ feed in
-//                .init(content: .bestSet(configuration: .init(
-//                    id: feed.id,
-//                    bestSet: feed.bestSet)))
-//        }), toSection: .generalInfo)
+        
         dataSource.apply(snapshot)
     }
     
@@ -129,12 +104,28 @@ private extension HistoryView {
         }
         return dataSource
     }
+    
+    func updateGeneralInfo() {
+        
+        let throwInfo = HistoryCollectionItem(content: .throwInfo(configuration: .init(
+            id: GameLogic.throwInfo.id,
+            data: GameLogic.throwInfo.data)))
+        let bestSet = HistoryCollectionItem(content: .bestSet(configuration: .init(
+            id: GameLogic.bestSet.id,
+            bestSet: GameLogic.bestSet.bestSet)))
+
+        var snapshot = dataSource.snapshot(for: .generalInfo)
+        
+        snapshot.deleteAll()
+        snapshot.append([throwInfo, bestSet])
+        
+        dataSource.apply(snapshot, to: .generalInfo)
+    }
 }
 
 extension HistoryView: HistoryViewDelegate {
     
     func appendRockPaperItem(_ item: HistoryOfRockPaper) {
-        print("appendRockPaperItem")
         var snapshot = dataSource.snapshot()
         let newItem = HistoryCollectionItem(content: .rockPaper(configuration: .init(
             id: item.id,
@@ -144,19 +135,20 @@ extension HistoryView: HistoryViewDelegate {
         
         snapshot.appendItems([newItem], toSection: .rockPaper)
         dataSource.apply(snapshot)
-        print(item)
+
+        updateGeneralInfo()
     }
     
     func appendCubeGameItem(_ item: HistoryOfCubeGame) {
-        print("appendCubeGameItem")
         var snapshot = dataSource.snapshot()
         let newItem = HistoryCollectionItem(content: .cubeGame(configuration: .init(
             id: item.id,
             randomCube: item.randomCube)))
+        
         snapshot.appendItems([newItem], toSection: .cubeGame)
         dataSource.apply(snapshot)
-        
-        print(item)
+
+        updateGeneralInfo()
     }
 }
     

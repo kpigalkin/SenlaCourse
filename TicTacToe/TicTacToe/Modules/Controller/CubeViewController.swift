@@ -3,8 +3,7 @@ import UIKit
 
  final class CubeViewController: UIViewController {
      
-     private weak var dataDelegate: CubeGameDelegate?
-     private let hVC = HistoryViewController()
+     weak var dataDelegate: CubeGameDelegate?
 
      private var buttonsAction = true
 
@@ -107,7 +106,6 @@ import UIKit
      override func viewDidLoad() {
          super.viewDidLoad()
          setupView()
-         self.dataDelegate = hVC
      }
 
      override func viewDidLayoutSubviews() {
@@ -163,10 +161,10 @@ import UIKit
             id: GameLogic.getCubeGameIndex,
             randomCube: randomButton.text ?? "unknowed")
          
-         dataDelegate?.sendCubeGameItem(cubeSide)
-         
          // statistics for HistoryView (1st section)
          fillingStatistics(sideOfCube: (randomButton.text)!)
+         
+         dataDelegate?.sendCubeGameItem(cubeSide)
      }
 
      func routeToDiceGameResult() {
@@ -206,10 +204,5 @@ import UIKit
              newData.append(stringInCollection)
          }
          GameLogic.throwInfo.data = newData
-         
-         // Third section - history of "Cube Game"
-//         let newItem = HistoryOfCubeGame(id: GameLogic.getCubeGameIndex, randomCube: sideOfCube)
-//         GameLogic.historyOfCubeGame.append(newItem)
-         
      }
  }

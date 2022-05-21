@@ -24,15 +24,27 @@ final class TabBarController: UITabBarController {
 private extension TabBarController {
     
     func setupTabBar() {
+    
+        let historyVC = HistoryViewController()
+        let historyView = HistoryView()
+        historyVC.view = historyView
+        historyVC.historyViewDelegate = historyView
+        
+        let rspVC = RockPaperViewController()
+        rspVC.dataDelegate = historyVC
+        
+        let cubeVC = CubeViewController()
+        cubeVC.dataDelegate = historyVC
+        
         
         let navCTicTac = NavigationController(
-            rootViewController: CubeViewController()
+            rootViewController: cubeVC
         )
         let navCRockPaper = NavigationController(
-            rootViewController: RockPaperViewController()
+            rootViewController: rspVC
         )
         let navCHistory = NavigationController(
-            rootViewController: HistoryViewController()
+            rootViewController: historyVC
         )
         let navCAnimation = NavigationController(
             rootViewController: AnimationViewController()
