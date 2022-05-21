@@ -7,53 +7,72 @@
 
 import UIKit
 
-struct RockPaper {
+struct GameLogic {
+    
+    // Store data for HistoryView.
+    static var historyOfRockPaper = 0
+    static var getRockPaperIndex: Int {
+        historyOfRockPaper += 1
+        return historyOfRockPaper - 1
+    }
+    static var historyOfCubeGame = 0
+    static var getCubeGameIndex: Int {
+        historyOfCubeGame += 1
+        return historyOfCubeGame - 1
+    }
+    static var throwInfo = ThrowInfo(id: 0, data: [])
+    static var bestSet = BestRockPaperSet(id: 0, bestSet: 0)
+    static var currentWinSet = 0
 
-enum Language: String {
-    case eng, rus
-}
+    
+    
+    enum Language: String {
+        case eng, rus
+    }
 
-enum GameResult {
-    case win, lose, draw, defaultStatus
-}
+    enum GameResult {
+        case win
+        case lose
+        case draw
+        case defaultStatus
+    }
 
-enum ItemsEnum: String, CaseIterable {
-    case rock = "🗿"
-    case paper = "🧻"
-    case scissors = "✂️"
+    enum ItemsEnum: String, CaseIterable {
+        case rock = "🗿"
+        case paper = "🧻"
+        case scissors = "✂️"
 
-    static func random(drawMode: Bool) -> ItemsEnum.RawValue {
+        static func random(drawMode: Bool) -> ItemsEnum.RawValue {
 
-     var all = [String]()
-     allCases.forEach() {
-         all.append($0.rawValue)
-     }
-     if drawMode == false {
-         all = all.filter {$0 != userChose}
-     }
-     return all.randomElement()!
-     }
-}
+         var all = [String]()
+         allCases.forEach() {
+             all.append($0.rawValue)
+         }
+         if drawMode == false {
+             all = all.filter {$0 != userChose}
+         }
+         return all.randomElement()!
+         }
+    }
 
+    static var languageSCStoreIndex = 0
+    static var drawModeStatusSCStoreIndex = 0
+    
+    static var computerChose: String = ""
+    static var userChose: String = ""
+    static var drawModeStatus = false
+    static var languageStatus: Language = .rus
 
-static var languageSCStoreIndex = 0
-static var drawModeStatusSCStoreIndex = 0
-
-static var computerChose: String = ""
-static var userChose: String = ""
-static var drawModeStatus = false
-static var languageStatus: Language = .rus
-
-static let englishLanguage: [GameResult : String] = [
-.defaultStatus: "Game result",
-.win: "You win!",
-.draw: "Draw",
-.lose: "You lose..."
-]
-static let russianLanguage: [GameResult : String] = [
-.defaultStatus: "Результат игры",
-.win: "Вы выиграли!",
-.draw: "Ничья.",
-.lose: "Вы проиграли..."
-]
+    static let englishLanguage: [GameResult : String] = [
+        .defaultStatus: "Game result",
+        .win: "You win!",
+        .draw: "Draw",
+        .lose: "You lose..."
+    ]
+    static let russianLanguage: [GameResult : String] = [
+        .defaultStatus: "Результат игры",
+        .win: "Вы выиграли!",
+        .draw: "Ничья.",
+        .lose: "Вы проиграли..."
+    ]
 }

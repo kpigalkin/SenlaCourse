@@ -24,16 +24,35 @@ final class TabBarController: UITabBarController {
 private extension TabBarController {
     
     func setupTabBar() {
+    
+        let historyVC = HistoryViewController()
+        let historyView = HistoryView()
+        historyVC.view = historyView
+        historyVC.historyViewDelegate = historyView
+        
+        let rspVC = RockPaperViewController()
+        rspVC.dataDelegate = historyVC
+        
+        let cubeVC = CubeViewController()
+        cubeVC.dataDelegate = historyVC
+        
         
         let navCTicTac = NavigationController(
-            rootViewController: CubeViewController()
+            rootViewController: cubeVC
         )
         let navCRockPaper = NavigationController(
-            rootViewController: RockPaperViewController()
+            rootViewController: rspVC
         )
+        let navCHistory = NavigationController(
+            rootViewController: historyVC
+        )
+        let navCAnimation = NavigationController(
+            rootViewController: AnimationViewController()
+        )
+
         
         let configuration = UIImage.SymbolConfiguration(
-            pointSize: 24, weight: .heavy
+            pointSize: 23, weight: .heavy
         )
         
         
@@ -56,9 +75,27 @@ private extension TabBarController {
         )
         navCRockPaper.tabBarItem.selectedImage = UIImage(systemName: "gamecontroller.fill", withConfiguration: configuration)
         
+        navCHistory.tabBarItem = UITabBarItem(
+            title: "History",
+            image: UIImage(
+            systemName: "clock"
+            ),
+            tag: 2
+        )
+        navCHistory.tabBarItem.selectedImage = UIImage(systemName: "clock.fill", withConfiguration: configuration)
+        
+        navCAnimation.tabBarItem = UITabBarItem(
+            title: "Animation",
+            image: UIImage(
+            systemName: "bolt.horizontal.circle"
+            ),
+            tag: 3
+        )
+        navCAnimation.tabBarItem.selectedImage = UIImage(systemName: "bolt.horizontal.circle.fill", withConfiguration: configuration)
+        
         
         setViewControllers(
-            [navCRockPaper, navCTicTac],
+            [navCRockPaper, navCTicTac, navCHistory, navCAnimation],
             animated: false
         )
     }
