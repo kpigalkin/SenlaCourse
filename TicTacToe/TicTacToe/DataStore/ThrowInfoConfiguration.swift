@@ -119,12 +119,10 @@ final class ThrowInfoContentView: UIView, UIContentView {
             sideOfCube5.topAnchor.constraint(equalTo: sideOfCube4.bottomAnchor ,constant: 10),
             
             sideOfCube6.leadingAnchor.constraint(equalTo: sideOfCube.leadingAnchor),
-            sideOfCube6.topAnchor.constraint(equalTo: sideOfCube5.bottomAnchor ,constant: 10),
-        ])
+            sideOfCube6.topAnchor.constraint(equalTo: sideOfCube5.bottomAnchor ,constant: 10),])
     }
-    
-    
 }
+
 extension ThrowInfoContentView {
      func setupLabels() {
         if !GameLogic.throwInfo.data.isEmpty {

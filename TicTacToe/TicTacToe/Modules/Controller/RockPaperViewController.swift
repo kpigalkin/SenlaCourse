@@ -160,7 +160,7 @@ private extension RockPaperViewController {
         
         userLabel.text = GameLogic.userChose
         computerLabel.text = GameLogic.computerChose
-        title = printGameResultTitle(status: determinationWinner())
+        self.navigationItem.title = printGameResultTitle(status: determinationWinner())
         
         resultView.addSubview(userLabel)
         resultView.addSubview(computerLabel)
@@ -177,7 +177,7 @@ private extension RockPaperViewController {
         againButton.frame = CGRect(origin: .zero, size: .init(width: 120, height: 50))
         againButton.center = CGPoint(x: view.center.x, y: view.center.y + 115.0)
         
-        winSetCounter(gameStatus: title!)
+        winSetCounter(gameStatus: self.navigationItem.title!)
         sendingItemToCollection()
     }
     
@@ -188,14 +188,17 @@ private extension RockPaperViewController {
             gameStatus: title ?? "title",
             computerChose: GameLogic.computerChose,
             userChose: GameLogic.userChose)
+        print("RockPaper⭕️ sendingItemToRouter")
+//        winSetCounter(gameStatus: title!)
+        dataDelegate?.sendRockPaperItem(item)
         
-        self.dataDelegate?.sendRockPaperItem(item)
     }
             
     func winSetCounter(gameStatus: String) {
         if (gameStatus == GameLogic.russianLanguage[.win] ||
             gameStatus == GameLogic.englishLanguage[.win]) {
             GameLogic.currentWinSet += 1
+            print(" currentWinSet - \(GameLogic.currentWinSet)")
             } else {
                 GameLogic.currentWinSet = 0
             }

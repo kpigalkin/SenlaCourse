@@ -24,45 +24,47 @@ final class TabBarController: UITabBarController {
 private extension TabBarController {
     
     func setupTabBar() {
-    
-        let historyVC = HistoryViewController()
+        print("⭕️ setupTabBar")
+        // setup CleanHistoryViewController
+        let viewController = CleanHistoryVC()
+        let interactor = CleanInteractor()
+        let presenter = CleanPresenter()
+        let router = CleanRouter()
+        viewController.interactor = interactor
+        viewController.router = router
+        interactor.presenter = presenter
+        presenter.viewController = viewController
+        router.viewController = viewController
+        router.dataStore = interactor
+        //
         let historyView = HistoryView()
-        historyVC.view = historyView
-        historyVC.historyViewDelegate = historyView
+//        let cleanHistoryVC = CleanHistoryVC()
         
+        viewController.view = historyView
+        viewController.historyView = historyView
+        
+//        let router = CleanRouter()
         let rspVC = RockPaperViewController()
-        rspVC.dataDelegate = historyVC
-        
         let cubeVC = CubeViewController()
-        cubeVC.dataDelegate = historyVC
+
+        rspVC.dataDelegate = router
+        cubeVC.dataDelegate = router
         
-        
-        let navCTicTac = NavigationController(
-            rootViewController: cubeVC
-        )
-        let navCRockPaper = NavigationController(
-            rootViewController: rspVC
-        )
-        let navCHistory = NavigationController(
-            rootViewController: historyVC
-        )
-        let navCAnimation = NavigationController(
-            rootViewController: AnimationViewController()
-        )
+        let navCTicTac = NavigationController(rootViewController: cubeVC)
+        let navCRockPaper = NavigationController(rootViewController: rspVC)
+        let navCHistory = NavigationController(rootViewController: viewController)
+        let navCAnimation = NavigationController(rootViewController: AnimationViewController())
 
         
         let configuration = UIImage.SymbolConfiguration(
-            pointSize: 23, weight: .heavy
-        )
-        
+            pointSize: 23, weight: .heavy)
         
         navCTicTac.tabBarItem = UITabBarItem(
             title: "Cube",
             image: UIImage(
                 systemName: "cube"
             ),
-            tag: 0
-        )
+            tag: 0)
         navCTicTac.tabBarItem.selectedImage = UIImage(systemName: "cube.fill", withConfiguration: configuration)
         
         
@@ -71,8 +73,7 @@ private extension TabBarController {
             image: UIImage(
                 systemName: "gamecontroller"
             ),
-            tag: 1
-        )
+            tag: 1)
         navCRockPaper.tabBarItem.selectedImage = UIImage(systemName: "gamecontroller.fill", withConfiguration: configuration)
         
         navCHistory.tabBarItem = UITabBarItem(
@@ -80,8 +81,7 @@ private extension TabBarController {
             image: UIImage(
             systemName: "clock"
             ),
-            tag: 2
-        )
+            tag: 2)
         navCHistory.tabBarItem.selectedImage = UIImage(systemName: "clock.fill", withConfiguration: configuration)
         
         navCAnimation.tabBarItem = UITabBarItem(
@@ -89,15 +89,13 @@ private extension TabBarController {
             image: UIImage(
             systemName: "bolt.horizontal.circle"
             ),
-            tag: 3
-        )
+            tag: 3)
         navCAnimation.tabBarItem.selectedImage = UIImage(systemName: "bolt.horizontal.circle.fill", withConfiguration: configuration)
         
         
         setViewControllers(
             [navCRockPaper, navCTicTac, navCHistory, navCAnimation],
-            animated: false
-        )
+            animated: false)
     }
 }
 

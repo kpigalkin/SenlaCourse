@@ -35,7 +35,7 @@ import UIKit
      var numberOfThrowing = 0.0
      
      
-     lazy var cubeSide1: UILabel = {
+     private lazy var cubeSide1: UILabel = {
          let title = UILabel()
          title.text = playingField[0]
          title.textColor = .white
@@ -44,7 +44,7 @@ import UIKit
          title.backgroundColor = .clear
          return title
      }()
-     lazy var cubeSide2: UILabel = {
+     private lazy var cubeSide2: UILabel = {
          let title = UILabel()
          title.text = playingField[1]
          title.textColor = .white
@@ -53,7 +53,7 @@ import UIKit
          title.backgroundColor = .clear
          return title
      }()
-     lazy var cubeSide3: UILabel = {
+     private lazy var cubeSide3: UILabel = {
          let title = UILabel()
          title.text = playingField[2]
          title.textColor = .white
@@ -62,7 +62,7 @@ import UIKit
          title.backgroundColor = .clear
          return title
      }()
-     lazy var cubeSide4: UILabel = {
+     private lazy var cubeSide4: UILabel = {
          let title = UILabel()
          title.text = playingField[3]
          title.textColor = .white
@@ -71,7 +71,7 @@ import UIKit
          title.backgroundColor = .clear
          return title
      }()
-     lazy var cubeSide5: UILabel = {
+     private lazy var cubeSide5: UILabel = {
          let title = UILabel()
          title.text = playingField[4]
          title.textColor = .white
@@ -80,7 +80,7 @@ import UIKit
          title.backgroundColor = .clear
          return title
      }()
-     lazy var cubeSide6: UILabel = {
+     private lazy var cubeSide6: UILabel = {
          let title = UILabel()
          title.text = playingField[5]
          title.textColor = .white
@@ -91,7 +91,7 @@ import UIKit
      }()
      
      
-     lazy var throwButton: UIButton = {
+     private lazy var throwButton: UIButton = {
          let button = UIButton()
          button.setTitle("Throw a dice", for: .normal)
          button.titleLabel?.font = .systemFont(ofSize: 30, weight: .medium)
@@ -163,7 +163,7 @@ import UIKit
          
          // statistics for HistoryView (1st section)
          fillingStatistics(sideOfCube: (randomButton.text)!)
-         
+         print("CubeGame⭕️ sendingItemToRouter")
          dataDelegate?.sendCubeGameItem(cubeSide)
      }
 
