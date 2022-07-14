@@ -48,7 +48,6 @@ final class HistoryView: UIView, UICollectionViewDelegate {
     }()
     
     override init(frame: CGRect) {
-
         super.init(frame: .zero)
         backgroundColor = .secondarySystemBackground
         addSubviews()
@@ -61,6 +60,7 @@ final class HistoryView: UIView, UICollectionViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
 private extension HistoryView {
     
     func addSubviews() {
@@ -73,11 +73,13 @@ private extension HistoryView {
             collectionView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
-        ])
+            collectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)])
     }
     
     func createSections() {
+        
+        print("⭕️ createSections HistoryView\n")
+        
         var snapshot = NSDiffableDataSourceSnapshot<Section, HistoryCollectionItem>()
         snapshot.appendSections([.generalInfo, .rockPaper, .cubeGame])
         
@@ -104,20 +106,14 @@ private extension HistoryView {
         }
         return dataSource
     }
-    
-    func updateGeneralInfo() {
-        
-        let throwInfo = HistoryCollectionItem(content: .throwInfo(configuration: .init(
-            id: GameLogic.throwInfo.id,
-            data: GameLogic.throwInfo.data)))
-        let bestSet = HistoryCollectionItem(content: .bestSet(configuration: .init(
-            id: GameLogic.bestSet.id,
-            bestSet: GameLogic.bestSet.bestSet)))
+    // MARK: Update snapshot
+    func updateGeneralInfo(viewModel: Clean.Something.ViewModel) {
+        print("⭕️ updateGeneralInfo HistoryView\n")
 
         var snapshot = dataSource.snapshot(for: .generalInfo)
         
         snapshot.deleteAll()
-        snapshot.append([throwInfo, bestSet])
+        snapshot.append([viewModel.throwInfo, viewModel.bestSet])
         
         dataSource.apply(snapshot, to: .generalInfo)
     }
@@ -125,34 +121,17 @@ private extension HistoryView {
 
 extension HistoryView: HistoryViewDelegate {
     
-    func appendRockPaperItem(_ item: HistoryOfRockPaper) {
-        var snapshot = dataSource.snapshot()
-        let newItem = HistoryCollectionItem(content: .rockPaper(configuration: .init(
-            id: item.id,
-            gameStatus: item.gameStatus,
-            computerChose: item.computerChose,
-            userChose: item.userChose)))
+    func appendNewItems(viewModel: Clean.Something.ViewModel, section: Section) {
+        print("⭕️ viewModel HistoryView\n")
         
-        snapshot.appendItems([newItem], toSection: .rockPaper)
-        dataSource.apply(snapshot)
-
-        updateGeneralInfo()
-    }
-    
-    func appendCubeGameItem(_ item: HistoryOfCubeGame) {
         var snapshot = dataSource.snapshot()
-        let newItem = HistoryCollectionItem(content: .cubeGame(configuration: .init(
-            id: item.id,
-            randomCube: item.randomCube)))
-        
-        snapshot.appendItems([newItem], toSection: .cubeGame)
+        snapshot.appendItems([viewModel.item], toSection: section)
         dataSource.apply(snapshot)
-
-        updateGeneralInfo()
+        
+        updateGeneralInfo(viewModel: viewModel)
     }
 }
     
 protocol HistoryViewDelegate: AnyObject {
-    func appendRockPaperItem(_ item: HistoryOfRockPaper)
-    func appendCubeGameItem(_ item: HistoryOfCubeGame)
+    func appendNewItems(viewModel: Clean.Something.ViewModel, section: Section)
 }
